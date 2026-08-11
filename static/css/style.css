@@ -1,0 +1,36 @@
+/*
+   Custom Styles on top of BootStrap.
+   Main design (buttons, forms) are made by 
+   Bootstrap. Here is only some adjustments.
+ */
+
+/* IMAGE PLACEHOLDER*/
+.placeholder-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #eef0f2;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 4px;
+}
+
+/* Accessability : hide visual text, but keep it for screenreaders */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* Minimum height for content(for footer) */
+.page-content {
+  min-height: 60vh;
+}

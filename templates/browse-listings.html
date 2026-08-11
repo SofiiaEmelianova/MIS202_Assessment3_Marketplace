@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Page settings and links to Bootstrap and custom styles -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Marketplace | Browse Listings</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+  <!-- Displays the current user role -->
+  <div class="bg-dark text-white text-center py-1 small">
+    ROLE: GUEST (not logged in)
+  </div>
+  
+  <!-- Header with the website logo and navigation menu -->
+  <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">Student Marketplace</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" title="Toggle navigation menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="browse-listings.html">Browse</a></li>
+          <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container page-content py-4">
+
+    <!-- Page heading and selected category label -->
+    <h1 class="h3 mb-3">Browse Listings</h1>
+    <p class="text-muted small" id="activeCategoryLabel"></p>
+
+    <!-- Search, sorting and filtering options -->
+    <form class="row g-2 mb-4" role="search">
+      <div class="col-12 col-md-4">
+        <label for="search" class="visually-hidden">Search listings</label>
+        <input type="search" id="search" class="form-control" placeholder="Search listings..." title="Search listings by keyword">
+      </div>
+      <div class="col-6 col-md-2">
+        <label for="sortPrice" class="visually-hidden">Sort by price</label>
+        <select id="sortPrice" class="form-select" title="Sort by price">
+          <option value="">Price</option>
+          <option value="asc">Low to High</option>
+          <option value="desc">High to Low</option>
+        </select>
+      </div>
+      <div class="col-6 col-md-2">
+        <label for="sortDate" class="visually-hidden">Sort by date</label>
+        <select id="sortDate" class="form-select" title="Sort by listing date">
+          <option value="">Date</option>
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+        </select>
+      </div>
+      <div class="col-6 col-md-2">
+        <label for="filterCondition" class="visually-hidden">Filter by condition</label>
+        <!-- Filter works with JavaScript in js/script.js -->
+        <select id="filterCondition" class="form-select" title="Filter by product condition">
+          <option value="">Condition: All</option>
+          <option value="new">New</option>
+          <option value="second-hand">Second-Hand</option>
+        </select>
+      </div>
+      <div class="col-6 col-md-2">
+        <label for="filterCategory" class="visually-hidden">Filter by category</label>
+        <!-- Filter works with JavaScript in js/script.js -->
+        <select id="filterCategory" class="form-select" title="Filter by category">
+          <option value="">Category: All</option>
+          <option value="books">Books</option>
+          <option value="electronics">Electronics</option>
+          <option value="clothing">Clothing</option>
+          <option value="notes">Notes</option>
+          <option value="sports">Sports</option>
+        </select>
+      </div>
+    </form>
+
+    <!-- Grid displaying all marketplace listings -->
+    <div class="row g-3" id="listingsGrid">
+  {% for listing in listings %}
+  <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="books" data-condition="{{ listing.condition }}">
+    <a href="product-details.html" class="text-decoration-none text-dark">
+      <div class="card h-100">
+        <div class="placeholder-img">IMG</div>
+        <div class="card-body">
+          <h3 class="h6 mb-1">{{ listing.title }}</h3>
+          <p class="fw-bold mb-1">${{ listing.price }}</p>
+          <p class="text-muted small mb-0">{{ listing.get_condition_display }} &middot; {{ listing.seller_name }}</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+</div>
+  
+    <!-- Message displayed when no listings match the selected filters -->
+    <p class="text-muted text-center mt-4 d-none" id="noResultsMessage">No listings match your filters.</p>
+  </main>
+  <!-- Footer with navigation links and copyright information -->
+  <footer class="bg-light text-center py-4 mt-5 border-top">
+    <nav class="mb-2">
+      <a href="index.html" class="text-decoration-none text-secondary me-3">Home</a>
+      <a href="browse-listings.html" class="text-decoration-none text-secondary me-3">Browse</a>
+      <a href="faq.html" class="text-decoration-none text-secondary me-3">FAQ</a>
+      <a href="register.html" class="text-decoration-none text-secondary">Register</a>
+    </nav>
+    <p class="text-muted small mb-0">&copy; 2026 Student Marketplace. All rights reserved.</p>
+  </footer>
+
+  <!-- Bootstrap and custom JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

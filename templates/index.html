@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+       Name:Sofiia Emelianova A00177140
+       Subject: MIS202 Assessment 2
+       Date: 18/06/2026
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Marketplace | Home</title>
+    <!-- loads Bootstrap framework for styles and components -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+ <!-- shows the user role -->
+  <div class="bg-dark text-white text-center py-1 small">
+    ROLE: GUEST (not logged in)
+  </div>
+
+  <!-- HEADER: navigation for the "guest" role containing the main navigation menu,website logo/name linking to homepage,mobile navigation button, navigation links and menu items -->
+
+  <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">Student Marketplace</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" title="Toggle navigation menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="browse-listings.html">Browse</a></li>
+          <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+ <!-- Main homepage content with HERO section and search form-->
+
+  <main class="container-fluid page-content">
+    <section class="hero text-center py-5 bg-light mb-4">
+      <h1>Find what you need. Sell what you don't.</h1>
+      <p class="text-muted">A marketplace made for Australian university students.</p>
+      <form class="d-flex justify-content-center gap-2" role="search">
+        <label for="home-search" class="visually-hidden">Search listings</label>
+        <input type="search" id="home-search" class="form-control w-auto" style="max-width:400px;" placeholder="Search for textbooks, electronics..." title="Search all approved listings">
+        <button type="submit" class="btn btn-dark" title="Run search">Search</button>
+      </form>
+    </section>
+ <!-- Category section for browsing products by type -->
+
+    <div class="container">
+      <section class="mb-4">
+        <h2 class="h4 mb-3">Browse by Category</h2>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="browse-listings.html?category=books" class="btn btn-outline-secondary rounded-pill" title="View Books listings">Books</a>
+          <a href="browse-listings.html?category=electronics" class="btn btn-outline-secondary rounded-pill" title="View Electronics listings">Electronics</a>
+          <a href="browse-listings.html?category=clothing" class="btn btn-outline-secondary rounded-pill" title="View Clothing listings">Clothing</a>
+          <a href="browse-listings.html?category=notes" class="btn btn-outline-secondary rounded-pill" title="View Notes listings">Notes</a>
+          <a href="browse-listings.html?category=sports" class="btn btn-outline-secondary rounded-pill" title="View Sports listings">Sports</a>
+        </div>
+      </section>
+
+  <!-- section displaying the latest marketplace listings -->
+
+      <section class="mb-5">
+        <h2 class="h4 mb-3">Latest Listings</h2>
+  <!-- Bootstrap grid layout for product cards -->
+        <div class="row g-3">
+        <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="books" data-condition="second-hand">
+          <a href="product-details.html" class="text-decoration-none text-dark" title="View Calculus Textbook details">
+            <div class="card h-100">
+   <!-- Placeholder for product image -->            
+              <div class="placeholder-img">IMG</div>
+              <div class="card-body">
+                <!--product name-->
+                <h3 class="h6 mb-1">Calculus Textbook</h3>
+                <!--product price-->
+                <p class="fw-bold mb-1">$24.00</p>
+                <!-- Product condition and seller-->
+                <p class="text-muted small mb-0">Good &middot; Jane D.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+         <!-- Additional product cards use the same structure -->
+
+        <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="electronics" data-condition="second-hand">
+          <a href="product-details.html" class="text-decoration-none text-dark" title="View Scientific Calculator details">
+            <div class="card h-100">
+              <div class="placeholder-img">IMG</div>
+              <div class="card-body">
+                <h3 class="h6 mb-1">Scientific Calculator</h3>
+                <p class="fw-bold mb-1">$18.00</p>
+                <p class="text-muted small mb-0">Like New &middot; Jane D.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="electronics" data-condition="second-hand">
+          <a href="product-details.html" class="text-decoration-none text-dark" title="View Wireless Headphones details">
+            <div class="card h-100">
+              <div class="placeholder-img">IMG</div>
+              <div class="card-body">
+                <h3 class="h6 mb-1">Wireless Headphones</h3>
+                <p class="fw-bold mb-1">$35.00</p>
+                <p class="text-muted small mb-0">Good &middot; Tech Seller Hub</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="clothing" data-condition="second-hand">
+          <a href="product-details.html" class="text-decoration-none text-dark" title="View Lab Coat (Size M) details">
+            <div class="card h-100">
+              <div class="placeholder-img">IMG</div>
+              <div class="card-body">
+                <h3 class="h6 mb-1">Lab Coat (Size M)</h3>
+                <p class="fw-bold mb-1">$15.00</p>
+                <p class="text-muted small mb-0">Fair &middot; Campus Reads</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="books" data-condition="second-hand">
+          <a href="product-details.html" class="text-decoration-none text-dark" title="View Python Programming details">
+            <div class="card h-100">
+              <div class="placeholder-img">IMG</div>
+              <div class="card-body">
+                <h3 class="h6 mb-1">Python Programming</h3>
+                <p class="fw-bold mb-1">$20.00</p>
+                <p class="text-muted small mb-0">Good &middot; Jane D.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="sports" data-condition="new">
+          <a href="product-details.html" class="text-decoration-none text-dark" title="View Yoga Mat (New) details">
+            <div class="card h-100">
+              <div class="placeholder-img">IMG</div>
+              <div class="card-body">
+                <h3 class="h6 mb-1">Yoga Mat (New)</h3>
+                <p class="fw-bold mb-1">$12.00</p>
+                <p class="text-muted small mb-0">New &middot; FitCampus Store</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="electronics" data-condition="second-hand">
+          <a href="product-details.html" class="text-decoration-none text-dark" title="View Study Desk Lamp details">
+            <div class="card h-100">
+              <div class="placeholder-img">IMG</div>
+              <div class="card-body">
+                <h3 class="h6 mb-1">Study Desk Lamp</h3>
+                <p class="fw-bold mb-1">$10.00</p>
+                <p class="text-muted small mb-0">Good &middot; Jane D.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="notes" data-condition="second-hand">
+          <a href="product-details.html" class="text-decoration-none text-dark" title="View Chemistry Lab Kit details">
+            <div class="card h-100">
+              <div class="placeholder-img">IMG</div>
+              <div class="card-body">
+                <h3 class="h6 mb-1">Chemistry Lab Kit</h3>
+                <p class="fw-bold mb-1">$45.00</p>
+                <p class="text-muted small mb-0">Like New &middot; ScienceGear Co.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        </div>
+      </section>
+    </div>
+  </main>
+<!-- footer section containing navigation links and copyright -->
+  <footer class="bg-light text-center py-4 mt-5 border-top">
+     <!-- footer navigation menu -->
+    <nav class="mb-2">
+      <a href="index.html" class="text-decoration-none text-secondary me-3">Home</a>
+      <a href="browse-listings.html" class="text-decoration-none text-secondary me-3">Browse</a>
+      <a href="faq.html" class="text-decoration-none text-secondary me-3">FAQ</a>
+      <a href="register.html" class="text-decoration-none text-secondary">Register</a>
+    </nav>
+     <!-- Copyright information -->
+    <p class="text-muted small mb-0">&copy; 2026 Student Marketplace. All rights reserved.</p>
+  </footer>
+ <!-- Bootstrap JavaScript library and Custom file -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

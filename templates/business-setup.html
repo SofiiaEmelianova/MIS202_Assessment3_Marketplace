@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Marketplace | Set Up Your Business</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- shows the user role (stands in for real login, which needs a backend) -->
+  <div class="bg-dark text-white text-center py-1 small">
+    ROLE: VERIFIED SELLER
+  </div>
+
+  <!-- HEADER: navigation for the "seller" role containing the main navigation
+       menu, website logo/name linking to homepage, mobile navigation button,
+       navigation links and menu items -->
+  <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">Student Marketplace</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" title="Toggle navigation menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="my-listings.html">My Listings</a></li>
+          <li class="nav-item"><a class="nav-link" href="create-listing.html">Create Listing</a></li>
+          <li class="nav-item"><a class="nav-link" href="enquiries.html">Enquiries</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container page-content py-4" style="max-width:480px;">
+    <h1 class="h3 mb-3">Set Up Your Business</h1>
+    <p class="text-muted">Create your business profile to start listing items for sale on the marketplace.</p>
+
+    <form novalidate>
+      <div class="mb-3">
+        <label for="bizName" class="form-label">Business Name</label>
+        <input type="text" class="form-control" id="bizName" required placeholder="e.g. Jane D. Books" title="This name will be shown publicly">
+      </div>
+
+      <div class="mb-3">
+        <label for="bizEmail" class="form-label">Student / Staff Email</label>
+        <input type="email" class="form-control" id="bizEmail" value="student@university.edu.au" readonly title="Verified against university student records">
+      </div>
+
+      <div class="mb-3">
+        <label for="bizDescription" class="form-label">Business Description</label>
+        <textarea class="form-control" id="bizDescription" rows="3" placeholder="Tell buyers about your business..."></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="bizCategory" class="form-label">Primary Category</label>
+        <select class="form-select" id="bizCategory" required title="Choose your main product category">
+          <option value="">Select category</option>
+          <option>Books</option>
+          <option>Electronics</option>
+          <option>Clothing</option>
+          <option>Notes</option>
+          <option>Sports</option>
+        </select>
+      </div>
+
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" id="bizTerms" required title="Required to continue">
+        <label class="form-check-label" for="bizTerms">I agree to the Seller Terms &amp; Conditions</label>
+      </div>
+
+      <button type="submit" class="btn btn-dark w-100">Create Business Profile</button>
+    </form>
+  </main>
+
+  <!-- footer section containing navigation links and copyright -->
+  <footer class="bg-light text-center py-4 mt-5 border-top">
+    <!-- footer navigation menu -->
+    <nav class="mb-2">
+      <a href="index.html" class="text-decoration-none text-secondary me-3">Home</a>
+      <a href="browse-listings.html" class="text-decoration-none text-secondary me-3">Browse</a>
+      <a href="faq.html" class="text-decoration-none text-secondary me-3">FAQ</a>
+      <a href="register.html" class="text-decoration-none text-secondary">Register</a>
+    </nav>
+    <!-- copyright information -->
+    <p class="text-muted small mb-0">&copy; 2026 Student Marketplace. All rights reserved.</p>
+  </footer>
+
+  <!-- Bootstrap JavaScript bundle and our custom script file -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
