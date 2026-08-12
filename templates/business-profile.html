@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Page settings and links to Bootstrap and custom styles -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Marketplace | Business Profile</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- Displays the current user role -->
+  <div class="bg-dark text-white text-center py-1 small">
+    ROLE: REGISTERED BUYER
+  </div>
+
+  <!-- Header with the website logo and navigation menu -->
+  <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">
+        Student Marketplace
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" title="Toggle navigation menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="browse-listings.html">Browse</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="messages.html">Messages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="business-profile.html">Profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Main page content -->
+  <main class="container page-content py-4">
+    <!-- Page heading and main information -->
+    <div class="d-flex align-items-center gap-3 mb-4">
+      <div class="placeholder-img" style="width:80px;height:80px;">
+        LOGO
+      </div>
+      <div>
+        <h1 class="h4 mb-1">Jane D. Books</h1>
+        <p class="text-muted mb-0">
+          &#9733; 4.8 / 5 &middot; 47 reviews
+        </p>
+      </div>
+    </div>
+    <!-- Navigation tabs for products and ratings -->
+    <ul class="nav nav-tabs mb-3">
+      <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#products">
+          Products
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#ratings">
+          Ratings
+        </a>
+      </li>
+    </ul>
+
+    <!-- Main content section -->
+    <div class="tab-content">
+      <!-- Products tab displaying the seller's listings -->
+      <div class="tab-pane fade show active" id="products">
+        <div class="row g-3">
+          <!-- Individual product card (other cards use the same structure) -->
+          <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="books" data-condition="second-hand">
+            <a href="product-details.html" class="text-decoration-none text-dark" title="View Calculus Textbook details">
+              <div class="card h-100">
+                <div class="placeholder-img">
+                  IMG
+                </div>
+                <div class="card-body">
+                  <h3 class="h6 mb-1">
+                    Calculus Textbook
+                  </h3>
+                  <p class="fw-bold mb-1">
+                    $24.00
+                  </p>
+                  <p class="text-muted small mb-0">
+                    Good &middot; Jane D.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="electronics" data-condition="second-hand">
+            <a href="product-details.html" class="text-decoration-none text-dark" title="View Scientific Calculator details">
+              <div class="card h-100">
+                <div class="placeholder-img">
+                  IMG
+                </div>
+                <div class="card-body">
+                  <h3 class="h6 mb-1">
+                    Scientific Calculator
+                  </h3>
+                  <p class="fw-bold mb-1">
+                    $18.00
+                  </p>
+                  <p class="text-muted small mb-0">
+                    Like New &middot; Jane D.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="electronics" data-condition="second-hand">
+            <a href="product-details.html" class="text-decoration-none text-dark" title="View Wireless Headphones details">
+              <div class="card h-100">
+                <div class="placeholder-img">
+                  IMG
+                </div>
+                <div class="card-body">
+                  <h3 class="h6 mb-1">
+                    Wireless Headphones
+                  </h3>
+                  <p class="fw-bold mb-1">
+                    $35.00
+                  </p>
+                  <p class="text-muted small mb-0">
+                    Good &middot; Tech Seller Hub
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+                    <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="clothing" data-condition="second-hand">
+
+            <a href="product-details.html" class="text-decoration-none text-dark" title="View Lab Coat (Size M) details">
+              <div class="card h-100">
+                <div class="placeholder-img">
+                  IMG
+                </div>
+                <div class="card-body">
+                  <h3 class="h6 mb-1">
+                    Lab Coat (Size M)
+                  </h3>
+                  <p class="fw-bold mb-1">
+                    $15.00
+                  </p>
+                  <p class="text-muted small mb-0">
+                    Fair &middot; Campus Reads
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="books" data-condition="second-hand">
+            <a href="product-details.html" class="text-decoration-none text-dark" title="View Python Programming details">
+              <div class="card h-100">
+                <div class="placeholder-img">
+                  IMG
+                </div>
+                <div class="card-body">
+                  <h3 class="h6 mb-1">
+                    Python Programming
+                  </h3>
+                  <p class="fw-bold mb-1">
+                    $20.00
+                  </p>
+                  <p class="text-muted small mb-0">
+                    Good &middot; Jane D.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="sports" data-condition="new">
+            <a href="product-details.html" class="text-decoration-none text-dark" title="View Yoga Mat (New) details">
+              <div class="card h-100">
+                <div class="placeholder-img">
+                  IMG
+                </div>
+                <div class="card-body">
+                  <h3 class="h6 mb-1">
+                    Yoga Mat (New)
+                  </h3>
+                  <p class="fw-bold mb-1">
+                    $12.00
+                  </p>
+                  <p class="text-muted small mb-0">
+                    New &middot; FitCampus Store
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="electronics" data-condition="second-hand">
+            <a href="product-details.html" class="text-decoration-none text-dark" title="View Study Desk Lamp details">
+              <div class="card h-100">
+                <div class="placeholder-img">
+                  IMG
+                </div>
+                <div class="card-body">
+                  <h3 class="h6 mb-1">
+                    Study Desk Lamp
+                  </h3>
+                  <p class="fw-bold mb-1">
+                    $10.00
+                  </p>
+                  <p class="text-muted small mb-0">
+                    Good &middot; Jane D.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="notes" data-condition="second-hand">
+            <a href="product-details.html" class="text-decoration-none text-dark" title="View Chemistry Lab Kit details">
+              <div class="card h-100">
+                <div class="placeholder-img">
+                  IMG
+                </div>
+                <div class="card-body">
+                  <h3 class="h6 mb-1">
+                    Chemistry Lab Kit
+                  </h3>
+                  <p class="fw-bold mb-1">
+                    $45.00
+                  </p>
+                  <p class="text-muted small mb-0">
+                    Like New &middot; ScienceGear Co.
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ratings tab showing customer reviews -->
+      <div class="tab-pane fade" id="ratings">
+        <p class="text-muted">
+          Customer feedback and ratings will appear here.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer with navigation links and copyright information -->
+  <footer class="bg-light text-center py-4 mt-5 border-top">
+    <nav class="mb-2">
+      <a href="index.html" class="text-decoration-none text-secondary me-3">
+        Home
+      </a>
+      <a href="browse-listings.html" class="text-decoration-none text-secondary me-3">
+        Browse
+      </a>
+      <a href="faq.html" class="text-decoration-none text-secondary me-3">
+        FAQ
+      </a>
+      <a href="register.html" class="text-decoration-none text-secondary">
+        Register
+      </a>
+    </nav>
+
+    <p class="text-muted small mb-0">
+      &copy; 2026 Student Marketplace. All rights reserved.
+    </p>
+
+  </footer>
+
+  <!-- Bootstrap and custom JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+
+
+</body>
+</html>
