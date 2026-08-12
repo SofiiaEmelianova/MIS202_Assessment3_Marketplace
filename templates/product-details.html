@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Marketplace | Product Details</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
@@ -19,15 +20,15 @@
        navigation links and menu items -->
   <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">Student Marketplace</a>
+      <a class="navbar-brand fw-bold" href="{% url 'home' %}">Student Marketplace</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" title="Toggle navigation menu">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="browse-listings.html">Browse</a></li>
-          <li class="nav-item"><a class="nav-link" href="favourites.html">Favourites</a></li>
-          <li class="nav-item"><a class="nav-link" href="messages.html">Messages</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'browse_listings' %}">Browse</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'favourites_list' %}">Favourites</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'messages_list' %}">Messages</a></li>
           <li class="nav-item"><a class="nav-link" href="business-profile.html">Profile</a></li>
         </ul>
       </div>
@@ -37,55 +38,94 @@
   <main class="container page-content py-4">
     <div class="row g-4">
       <div class="col-md-6">
+        {% with first_image=listing.images.first %}
+        {% if first_image %}
+        <img src="{{ first_image.image.url }}" class="mb-2" style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:4px;">
+        {% else %}
         <div class="placeholder-img mb-2" style="aspect-ratio:1/1;">Main Product Image</div>
-        <div class="d-flex gap-2">
-          <div class="placeholder-img" style="width:60px;height:60px;">1</div>
-          <div class="placeholder-img" style="width:60px;height:60px;">2</div>
-          <div class="placeholder-img" style="width:60px;height:60px;">3</div>
+        {% endif %}
+        {% endwith %}
+
+        <div class="d-flex gap-2 flex-wrap">
+          {% for img in listing.images.all %}
+          <img src="{{ img.image.url }}" style="width:60px;height:60px;object-fit:cover;border-radius:4px;">
+          {% endfor %}
         </div>
       </div>
+
       <div class="col-md-6">
-        <h1 class="h3">Calculus Textbook - 8th Edition</h1>
-        <p class="h4">$24.00 <small class="text-muted text-decoration-line-through">$35.00</small></p>
+        <h1 class="h3">{{ listing.title }}</h1>
+        <p class="h4">
+          ${{ listing.price }}
+          {% if listing.discount_price %}
+          <small class="text-muted text-decoration-line-through">${{ listing.discount_price }}</small>
+          {% endif %}
+        </p>
         <p>
-          <span class="badge bg-secondary">Condition: Good</span>
-          <span class="badge bg-success">In Stock</span>
+          <span class="badge bg-secondary">Condition: {{ listing.get_condition_display }}</span>
+          <span class="badge bg-success">{{ listing.get_availability_display }}</span>
         </p>
         <h2 class="h6 mt-4">Description</h2>
-        <p class="text-muted">Lightly used. All pages intact. Highlights in chapters 3-5 only. Suitable for first-year engineering students.</p>
+        <p class="text-muted">{{ listing.description }}</p>
 
         <h2 class="h6 mt-4">Seller</h2>
-        <p><a href="business-profile.html">Jane D. Books</a> &middot; &#9733; 4.8 (47 reviews)</p>
+        <p><a href="business-profile.html">{{ listing.seller_name }}</a></p>
 
         <div class="d-flex gap-2 mb-3">
-          <button class="btn btn-dark flex-grow-1" title="Send a private message to this seller">Message Seller</button>
+          <a href="{% url 'chat' listing.id %}" class="btn btn-dark flex-grow-1" title="Send a private message to this seller">Message Seller</a>
           <!-- favourite button - required feature per case study -->
-          <button class="btn btn-outline-secondary" title="Add this listing to your favourites" aria-label="Add to favourites">&#9825; Favourite</button>
+          <a href="{% url 'toggle_favourite' listing.id %}" class="btn btn-outline-secondary" title="Add this listing to your favourites" aria-label="Add to favourites">
+            {% if listing.id in favourites %}&#9829; Favourited{% else %}&#9825; Favourite{% endif %}
+          </a>
         </div>
 
         <h2 class="h6 mt-4">Public Enquiries</h2>
-        <form class="mb-2">
+
+        {% for enquiry in enquiries %}
+        <div class="border rounded p-2 mb-2">
+          <p class="mb-1 small"><strong>{{ enquiry.asked_by }}:</strong> {{ enquiry.question }}</p>
+          {% if enquiry.answer %}
+          <p class="mb-0 small text-muted">&#8627; {{ enquiry.answer }}</p>
+          {% endif %}
+        </div>
+        {% endfor %}
+
+        <form method="post" class="mb-2">
+          {% csrf_token %}
           <label for="enquiry" class="visually-hidden">Ask a public question</label>
-          <textarea id="enquiry" class="form-control mb-2" rows="2" placeholder="Ask a public question about this item..." title="Your question and the seller's reply will be visible to everyone"></textarea>
+          <textarea id="enquiry" name="question" class="form-control mb-2" rows="2" placeholder="Ask a public question about this item..." title="Your question and the seller's reply will be visible to everyone"></textarea>
           <button type="submit" class="btn btn-outline-dark btn-sm">Post Question</button>
         </form>
 
         <!-- rating form - only relevant after a completed transaction, per case study -->
         <h2 class="h6 mt-4">Rate This Business</h2>
-        <p class="text-muted small">Available after a completed transaction.</p>
-        <form class="mb-2">
+        {% if average_rating %}
+        <p class="text-muted small">Average rating: {{ average_rating|floatformat:1 }} / 5 ({{ ratings|length }} review{{ ratings|length|pluralize }})</p>
+        {% else %}
+        <p class="text-muted small">No ratings yet.</p>
+        {% endif %}
+
+        {% for rating in ratings %}
+        <div class="border rounded p-2 mb-2">
+          <p class="mb-1 small">{{ rating.stars }} &#9733; &mdash; <strong>{{ rating.rated_by }}</strong></p>
+          {% if rating.comment %}<p class="mb-0 small text-muted">{{ rating.comment }}</p>{% endif %}
+        </div>
+        {% endfor %}
+
+        <form method="post" class="mb-2">
+          {% csrf_token %}
           <div class="mb-2">
             <label for="ratingStars" class="form-label small">Your Rating</label>
-            <select id="ratingStars" class="form-select form-select-sm w-auto" title="Choose a star rating from 1 to 5">
+            <select id="ratingStars" name="stars" class="form-select form-select-sm w-auto" title="Choose a star rating from 1 to 5">
               <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733; (5)</option>
               <option value="4">&#9733;&#9733;&#9733;&#9733;&#9734; (4)</option>
-              <option value="3">&#9733;&#9733;&#9733;&#9734;&#9734; (3)</option>
+              <option value="3">&#9733;&#9733;&#9734;&#9734;&#9734; (3)</option>
               <option value="2">&#9733;&#9733;&#9734;&#9734;&#9734; (2)</option>
               <option value="1">&#9733;&#9734;&#9734;&#9734;&#9734; (1)</option>
             </select>
           </div>
           <label for="ratingComment" class="visually-hidden">Feedback comment</label>
-          <textarea id="ratingComment" class="form-control mb-2" rows="2" placeholder="Share feedback about this business..." title="This feedback affects the business's public rating"></textarea>
+          <textarea id="ratingComment" name="comment" class="form-control mb-2" rows="2" placeholder="Share feedback about this business..." title="This feedback affects the business's public rating"></textarea>
           <button type="submit" class="btn btn-outline-dark btn-sm">Submit Rating</button>
         </form>
       </div>
@@ -96,9 +136,9 @@
   <footer class="bg-light text-center py-4 mt-5 border-top">
     <!-- footer navigation menu -->
     <nav class="mb-2">
-      <a href="index.html" class="text-decoration-none text-secondary me-3">Home</a>
-      <a href="browse-listings.html" class="text-decoration-none text-secondary me-3">Browse</a>
-      <a href="faq.html" class="text-decoration-none text-secondary me-3">FAQ</a>
+      <a href="{% url 'home' %}" class="text-decoration-none text-secondary me-3">Home</a>
+      <a href="{% url 'browse_listings' %}" class="text-decoration-none text-secondary me-3">Browse</a>
+      <a href="{% url 'faq' %}" class="text-decoration-none text-secondary me-3">FAQ</a>
       <a href="register.html" class="text-decoration-none text-secondary">Register</a>
     </nav>
     <!-- copyright information -->
@@ -107,6 +147,6 @@
 
   <!-- Bootstrap JavaScript bundle and our custom script file -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/script.js"></script>
+  <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

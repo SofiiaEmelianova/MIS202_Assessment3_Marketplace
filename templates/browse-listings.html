@@ -25,9 +25,9 @@
       </button>
       <div class="collapse navbar-collapse" id="mainNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="browse-listings.html">Browse</a></li>
-          <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'browse_listings' %}">Browse</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'faq' %}">FAQ</a></li>
           <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
         </ul>
       </div>
@@ -41,57 +41,65 @@
     <p class="text-muted small" id="activeCategoryLabel"></p>
 
     <!-- Search, sorting and filtering options -->
-    <form class="row g-2 mb-4" role="search">
-      <div class="col-12 col-md-4">
-        <label for="search" class="visually-hidden">Search listings</label>
-        <input type="search" id="search" class="form-control" placeholder="Search listings..." title="Search listings by keyword">
-      </div>
-      <div class="col-6 col-md-2">
-        <label for="sortPrice" class="visually-hidden">Sort by price</label>
-        <select id="sortPrice" class="form-select" title="Sort by price">
-          <option value="">Price</option>
-          <option value="asc">Low to High</option>
-          <option value="desc">High to Low</option>
-        </select>
-      </div>
-      <div class="col-6 col-md-2">
-        <label for="sortDate" class="visually-hidden">Sort by date</label>
-        <select id="sortDate" class="form-select" title="Sort by listing date">
-          <option value="">Date</option>
-          <option value="newest">Newest</option>
-          <option value="oldest">Oldest</option>
-        </select>
-      </div>
-      <div class="col-6 col-md-2">
-        <label for="filterCondition" class="visually-hidden">Filter by condition</label>
-        <!-- Filter works with JavaScript in js/script.js -->
-        <select id="filterCondition" class="form-select" title="Filter by product condition">
-          <option value="">Condition: All</option>
-          <option value="new">New</option>
-          <option value="second-hand">Second-Hand</option>
-        </select>
-      </div>
-      <div class="col-6 col-md-2">
-        <label for="filterCategory" class="visually-hidden">Filter by category</label>
-        <!-- Filter works with JavaScript in js/script.js -->
-        <select id="filterCategory" class="form-select" title="Filter by category">
-          <option value="">Category: All</option>
-          <option value="books">Books</option>
-          <option value="electronics">Electronics</option>
-          <option value="clothing">Clothing</option>
-          <option value="notes">Notes</option>
-          <option value="sports">Sports</option>
-        </select>
-      </div>
-    </form>
+   <form class="row g-2 mb-4" role="search" method="get">
+  <div class="col-12 col-md-4">
+    <label for="search" class="visually-hidden">Search listings</label>
+    <input type="search" id="search" name="search" class="form-control" placeholder="Search listings..." title="Search listings by keyword" value="{{ request.GET.search }}">
+  </div>
+  <div class="col-6 col-md-2">
+    <label for="sortPrice" class="visually-hidden">Sort by price</label>
+    <select id="sortPrice" name="sort_price" class="form-select" title="Sort by price">
+      <option value="">Price</option>
+      <option value="asc">Low to High</option>
+      <option value="desc">High to Low</option>
+    </select>
+  </div>
+  <div class="col-6 col-md-2">
+    <label for="sortDate" class="visually-hidden">Sort by date</label>
+    <select id="sortDate" name="sort_date" class="form-select" title="Sort by listing date">
+      <option value="">Date</option>
+      <option value="newest">Newest</option>
+      <option value="oldest">Oldest</option>
+    </select>
+  </div>
+  <div class="col-6 col-md-2">
+    <label for="filterCondition" class="visually-hidden">Filter by condition</label>
+    <select id="filterCondition" name="condition" class="form-select" title="Filter by product condition">
+      <option value="">Condition: All</option>
+      <option value="new">New</option>
+      <option value="second_hand">Second-Hand</option>
+    </select>
+  </div>
+  <div class="col-6 col-md-2">
+    <label for="filterCategory" class="visually-hidden">Filter by category</label>
+    <select id="filterCategory" name="category" class="form-select" title="Filter by category">
+      <option value="">Category: All</option>
+      <option value="Books">Books</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Clothing">Clothing</option>
+      <option value="Notes">Notes</option>
+      <option value="Sports">Sports</option>
+    </select>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-dark btn-sm">Apply</button>
+  </div>
+</form>
 
     <!-- Grid displaying all marketplace listings -->
-    <div class="row g-3" id="listingsGrid">
+    <div class="row g-3" id="listingsGridDjango">
+      <p class="text-muted text-center mt-4 d-none" id="noResultsMessage">No listings match your filters.</p>
   {% for listing in listings %}
   <div class="col-6 col-md-4 col-lg-3 listing-card" data-category="books" data-condition="{{ listing.condition }}">
-    <a href="product-details.html" class="text-decoration-none text-dark">
+    <a href="{% url 'product_details' listing.id %}" class="text-decoration-none text-dark">
       <div class="card h-100">
-        <div class="placeholder-img">IMG</div>
+     {% with first_image=listing.images.first %}
+{% if first_image %}
+<img src="{{ first_image.image.url }}" class="placeholder-img" style="object-fit:cover;">
+{% else %}
+<div class="placeholder-img">IMG</div>
+{% endif %}
+{% endwith %}
         <div class="card-body">
           <h3 class="h6 mb-1">{{ listing.title }}</h3>
           <p class="fw-bold mb-1">${{ listing.price }}</p>
@@ -107,16 +115,15 @@
     <p class="text-muted text-center mt-4 d-none" id="noResultsMessage">No listings match your filters.</p>
   </main>
   <!-- Footer with navigation links and copyright information -->
-  <footer class="bg-light text-center py-4 mt-5 border-top">
-    <nav class="mb-2">
-      <a href="index.html" class="text-decoration-none text-secondary me-3">Home</a>
-      <a href="browse-listings.html" class="text-decoration-none text-secondary me-3">Browse</a>
-      <a href="faq.html" class="text-decoration-none text-secondary me-3">FAQ</a>
-      <a href="register.html" class="text-decoration-none text-secondary">Register</a>
-    </nav>
-    <p class="text-muted small mb-0">&copy; 2026 Student Marketplace. All rights reserved.</p>
-  </footer>
-
+<footer class="bg-light text-center py-4 mt-5 border-top">
+  <nav class="mb-2">
+    <a href="{% url 'home' %}" class="text-decoration-none text-secondary me-3">Home</a>
+    <a href="{% url 'browse_listings' %}" class="text-decoration-none text-secondary me-3">Browse</a>
+    <a href="{% url 'faq' %}" class="text-decoration-none text-secondary me-3">FAQ</a>
+    <a href="register.html" class="text-decoration-none text-secondary">Register</a>
+  </nav>
+  <p class="text-muted small mb-0">&copy; 2026 Student Marketplace. All rights reserved.</p>
+</footer>
   <!-- Bootstrap and custom JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="{% static 'js/script.js' %}"></script>

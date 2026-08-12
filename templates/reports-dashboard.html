@@ -50,44 +50,52 @@
     </form>
     <p class="text-muted small">Date filter applies to all metrics and charts below.</p>
 
-    <div class="row g-3 mb-4">
-        <div class="col-6 col-md-4">
-          <div class="border rounded p-3 text-center">
-            <div class="h4 mb-0">1,284</div>
-            <div class="text-muted small">Monthly Active Users</div>
-          </div>
-        </div>
-        <div class="col-6 col-md-4">
-          <div class="border rounded p-3 text-center">
-            <div class="h4 mb-0">97</div>
-            <div class="text-muted small">Businesses</div>
-          </div>
-        </div>
-        <div class="col-6 col-md-4">
-          <div class="border rounded p-3 text-center">
-            <div class="h4 mb-0">432</div>
-            <div class="text-muted small">Listings</div>
-          </div>
-        </div>
-        <div class="col-6 col-md-4">
-          <div class="border rounded p-3 text-center">
-            <div class="h4 mb-0">318</div>
-            <div class="text-muted small">Ratings</div>
-          </div>
-        </div>
-        <div class="col-6 col-md-4">
-          <div class="border rounded p-3 text-center">
-            <div class="h4 mb-0">76</div>
-            <div class="text-muted small">Certificates Issued</div>
-          </div>
-        </div>
-        <div class="col-6 col-md-4">
-          <div class="border rounded p-3 text-center">
-            <div class="h4 mb-0">12.4%</div>
-            <div class="text-muted small">Conversion Rate</div>
-          </div>
-        </div>
+  <div class="row g-3 mb-4">
+    <div class="col-6 col-md-4">
+      <div class="border rounded p-3 text-center">
+        <div class="h4 mb-0">{{ total_listings }}</div>
+        <div class="text-muted small">Total Listings</div>
+      </div>
     </div>
+    <div class="col-6 col-md-4">
+      <div class="border rounded p-3 text-center">
+        <div class="h4 mb-0">{{ new_listings_count }}</div>
+        <div class="text-muted small">New Product Listings</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4">
+      <div class="border rounded p-3 text-center">
+        <div class="h4 mb-0">{{ second_hand_count }}</div>
+        <div class="text-muted small">Second-Hand Listings</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4">
+      <div class="border rounded p-3 text-center">
+        <div class="h4 mb-0">{{ approved_count }}</div>
+        <div class="text-muted small">Approved Listings</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4">
+      <div class="border rounded p-3 text-center">
+        <div class="h4 mb-0">{{ pending_count }}</div>
+        <div class="text-muted small">Pending Review</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4">
+      <div class="border rounded p-3 text-center">
+        <div class="h4 mb-0">
+          {% if average_rating_overall %}{{ average_rating_overall|floatformat:1 }}{% else %}N/A{% endif %}
+        </div>
+        <div class="text-muted small">Average Business Rating ({{ total_ratings }} reviews)</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-4">
+      <div class="border rounded p-3 text-center">
+        <div class="h4 mb-0">{{ total_enquiries }}</div>
+        <div class="text-muted small">Total Enquiries</div>
+      </div>
+    </div>
+</div>
 
     <h2 class="h6">Category Popularity</h2>
     <div class="placeholder-img mb-3" style="aspect-ratio:3/1;">Bar Chart &mdash; Category Popularity</div>
